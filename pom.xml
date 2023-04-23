@@ -153,7 +153,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>com.skills</groupId>
+            <artifactId>skills</artifactId>
+            <version>19.3.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/utils/SkillsPro.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>be.maximvdw</groupId>
             <artifactId>MVdWPlaceholderAPI</artifactId>
