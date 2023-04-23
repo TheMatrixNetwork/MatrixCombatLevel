@@ -4,6 +4,7 @@ import com.elmakers.mine.bukkit.api.magic.MagicAPI;
 import com.gmail.mrphpfan.mccombatlevel.McCombatLevel;
 import com.gmail.nossr50.datatypes.player.PlayerProfile;
 import com.gmail.nossr50.datatypes.skills.PrimarySkillType;
+import com.gmail.nossr50.util.player.UserManager;
 import com.magmaguy.elitemobs.adventurersguild.GuildRank;
 import com.magmaguy.elitemobs.playerdata.ElitePlayerInventory;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
@@ -62,6 +63,16 @@ public class JavaScriptCalculator implements LevelCalculator {
         int acrobatics = getLevel(mcMMOProfile, PrimarySkillType.ACROBATICS);
         return unarmed + swords + axes + archery + 0.25 * acrobatics + 0.25 * taming + 100;
     }
+    public static double getMcMMOLvl(Player player) {
+        PlayerProfile mcMMOProfile = UserManager.getPlayer(player).getProfile();
+        int swords = getLevel(mcMMOProfile, PrimarySkillType.SWORDS);
+        int axes = getLevel(mcMMOProfile, PrimarySkillType.AXES);
+        int unarmed = getLevel(mcMMOProfile, PrimarySkillType.UNARMED);
+        int archery = getLevel(mcMMOProfile, PrimarySkillType.ARCHERY);
+        int taming = getLevel(mcMMOProfile, PrimarySkillType.TAMING);
+        int acrobatics = getLevel(mcMMOProfile, PrimarySkillType.ACROBATICS);
+        return unarmed + swords + axes + archery + 0.25 * acrobatics + 0.25 * taming + 100;
+    }
 
     public static int getGuildRank(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
@@ -90,7 +101,6 @@ public class JavaScriptCalculator implements LevelCalculator {
             return SkilledPlayer.getSkilledPlayer(player).getSkillName();
         }
     }
-
     public static Map<String, Integer> getSkillStats(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player == null) {
@@ -103,8 +113,6 @@ public class JavaScriptCalculator implements LevelCalculator {
     public static String getGuildRankName(String playerName) {
         return GuildRank.getRankName(getElitePrestige(playerName), getGuildRank(playerName));
     }
-
-
 
     public static int getElitePrestige(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
