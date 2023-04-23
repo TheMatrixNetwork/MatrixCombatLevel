@@ -44,7 +44,7 @@ public class LeaderboardUpdateTask implements Runnable {
         }
 
         try {
-            Path tempFile = Files.createTempDirectory(plugin.getDataFolder().toPath(), "leaderboard-temp");
+            Path tempFile = new File(plugin.getDataFolder(), "leaderboard-temp").toPath();
             Path originalFile = new File(plugin.getDataFolder(), "leaderboardIndex.txt").toPath();
             if (Files.notExists(originalFile)) {
                 Files.createFile(originalFile);
@@ -59,7 +59,7 @@ public class LeaderboardUpdateTask implements Runnable {
                 toSave.clear();
 
                 Files.delete(originalFile);
-                Files.move(tempFile, originalFile, StandardCopyOption.COPY_ATTRIBUTES);
+                Files.move(tempFile, originalFile, StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (IOException ex) {
             plugin.getLogger().log(Level.SEVERE, "Error saving leaderboard", ex);

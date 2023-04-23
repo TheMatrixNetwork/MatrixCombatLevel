@@ -85,9 +85,15 @@ public class McCombatLevel extends JavaPlugin {
         return leaderboardUpdateTask;
     }
 
+    private static McCombatLevel  instance;
+    public static McCombatLevel inst() {
+        return instance;
+    }
+
     @Override
     public void onEnable() {
         loadConfiguration();
+        instance = this;
 
         //Choose the main scoreboard in order to be compatible with for example ColoredTags
         Scoreboard mainScoreboard = getServer().getScoreboardManager().getMainScoreboard();

@@ -21,7 +21,7 @@ public class OfflineProfileLookupTask implements Runnable {
     @Override
     public void run() {
         //there is no such player online -> offline lookup (this call should be async because it's blocking)
-        PlayerProfile offlineProfile = mcMMO.getDatabaseManager().loadPlayerProfile(playerName, false);
+        PlayerProfile offlineProfile = mcMMO.getDatabaseManager().loadPlayerProfile(playerName);
         Bukkit.getScheduler().runTask(plugin, new NpcCalculatorTask(plugin, offlineProfile, defaultLevel));
     }
 }
